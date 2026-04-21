@@ -6,6 +6,7 @@ import { TitlePlate } from "./components/TitlePlate/TitlePlate"
 import { useGameLogic } from "./shared/hooks/useGameLogic"
 import styles from './App.module.css'
 import { BetControls } from "./components/BetControls/BetControls"
+import { SpinButton } from "./components/SpinButton/SpinButton"
 
 function App() {
   // const balance = useGameStore(selectBalance)
@@ -21,6 +22,7 @@ function App() {
         <TitlePlate />
         <SlotMachine />
         <BetControls />
+        <SpinButton />
       </div>
     </div>
   )
