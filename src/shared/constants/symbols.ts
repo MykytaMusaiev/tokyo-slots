@@ -1,69 +1,51 @@
-// ─── Symbol Definitions ───────────────────────────────────────────────────────
-// Higher weight = more frequent. Total weight ≈ 100 for easy mental math.
-// Multiplier applies to the current bet amount.
-
 import { SymbolId, type SlotSymbol } from "../types";
+
+// ─── Asset Paths ──────────────────────────────────────────────────────────────
+
+const SLOTS_PATH = "/src/shared/assets/slots";
+
+// ─── Symbol Definitions ───────────────────────────────────────────────────────
+// Higher weight = more frequent.
+// Multiplier applies to the current bet on a 4-match win.
 
 export const SYMBOLS: Record<SymbolId, SlotSymbol> = {
     [SymbolId.Seven]: {
         id: SymbolId.Seven,
-        emoji: "7️⃣",
+        imagePath: `${SLOTS_PATH}/7slot.png`,
         label: "Lucky Seven",
         multiplier: 50,
-        weight: 2,
+        weight: 4,
     },
     [SymbolId.Cherry]: {
         id: SymbolId.Cherry,
-        emoji: "🍒",
+        imagePath: `${SLOTS_PATH}/cheryslot.png`,
         label: "Cherry",
         multiplier: 10,
-        weight: 14,
-    },
-    [SymbolId.Orange]: {
-        id: SymbolId.Orange,
-        emoji: "🍊",
-        label: "Orange",
-        multiplier: 8,
-        weight: 16,
+        weight: 24,
     },
     [SymbolId.Lemon]: {
         id: SymbolId.Lemon,
-        emoji: "🍋",
+        imagePath: `${SLOTS_PATH}/lemonslot.png`,
         label: "Lemon",
-        multiplier: 6,
-        weight: 18,
+        multiplier: 8,
+        weight: 28,
     },
-    [SymbolId.Pagoda]: {
-        id: SymbolId.Pagoda,
-        emoji: "🏯",
-        label: "Pagoda",
+    [SymbolId.Crown]: {
+        id: SymbolId.Crown,
+        imagePath: `${SLOTS_PATH}/crownslot.png`,
+        label: "Crown",
+        multiplier: 20,
+        weight: 20,
+    },
+    [SymbolId.Crystal]: {
+        id: SymbolId.Crystal,
+        imagePath: `${SLOTS_PATH}/crystallslot.png`,
+        label: "Crystal",
         multiplier: 15,
-        weight: 10,
-    },
-    [SymbolId.Blossom]: {
-        id: SymbolId.Blossom,
-        emoji: "🌸",
-        label: "Blossom",
-        multiplier: 12,
-        weight: 12,
-    },
-    [SymbolId.Star]: {
-        id: SymbolId.Star,
-        emoji: "⭐",
-        label: "Star",
-        multiplier: 7,
-        weight: 16,
-    },
-    [SymbolId.Coin]: {
-        id: SymbolId.Coin,
-        emoji: "🪙",
-        label: "Coin",
-        multiplier: 5,
-        weight: 12,
+        weight: 24,
     },
 };
 
-// Ordered array for strip generation (most common → least common)
 export const SYMBOL_LIST: SlotSymbol[] = Object.values(SYMBOLS);
 
 // Jackpot trigger: four Lucky Sevens

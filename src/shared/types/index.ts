@@ -13,18 +13,15 @@ export type GameState = (typeof GameState)[keyof typeof GameState];
 export const SymbolId = {
     Seven: "seven",
     Cherry: "cherry",
-    Orange: "orange",
     Lemon: "lemon",
-    Pagoda: "pagoda",
-    Blossom: "blossom",
-    Star: "star",
-    Coin: "coin",
+    Crown: "crown",
+    Crystal: "crystal",
 } as const;
 export type SymbolId = (typeof SymbolId)[keyof typeof SymbolId];
 
 export interface SlotSymbol {
     id: SymbolId;
-    emoji: string;
+    imagePath: string;
     label: string;
     multiplier: number;
     weight: number;
