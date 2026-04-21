@@ -1,22 +1,8 @@
 import { LEAF_COUNT_DESKTOP, LEAF_COUNT_MOBILE } from '../../shared/constants'
+import { PARTICLE_ICONS } from '../../shared/constants/particlePath'
+import type { ParticleConfig } from '../../shared/types'
 import styles from './Particles.module.css'
 
-const PARTICLE_ICONS = [
-  '/src/shared/assets/slots/7slot.png',
-  '/src/shared/assets/slots/cheryslot.png',
-  '/src/shared/assets/slots/lemonslot.png',
-  '/src/shared/assets/slots/crownslot.png',
-  '/src/shared/assets/slots/crystallslot.png',
-  '/src/shared/assets/bg_icons/coin_smile.png',
-  '/src/shared/assets/bg_icons/coin_arrows.png',
-]
-
-interface ParticleConfig {
-  id: number
-  src: string
-  style: React.CSSProperties
-  animationClass: string
-}
 
 function buildParticles(count: number): ParticleConfig[] {
   return Array.from({ length: count }, (_, i) => {

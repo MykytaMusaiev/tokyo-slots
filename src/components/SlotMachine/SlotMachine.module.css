@@ -34,8 +34,8 @@
 .leverWrapper {
     position: absolute;
     z-index: 3;
-    right: -2%; /* Можливо, доведеться підправити залежно від slot_body */
-    top: -1%; /* Піднімаємо вище, щоб низ палиці збігався з синім кріпленням */
+    right: -0.5%; /* Можливо, доведеться підправити залежно від slot_body */
+    top: 13%; /* Піднімаємо вище, щоб низ палиці збігався з синім кріпленням */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,14 +46,14 @@
 
 .leverBar {
     width: 22px;
-    height: 100px; /* Трохи збільшимо висоту для кращого ефекту */
+    height: 70px; /* Трохи збільшимо висоту для кращого ефекту */
     object-fit: contain;
     display: block;
 }
 
 .leverHandle {
-    width: 34px;
-    height: 34px;
+    width: 25px;
+    height: 25px;
     object-fit: contain;
     display: block;
     margin-bottom: -5px; /* Засуваємо трохи "за" палицю зверху, якщо треба */

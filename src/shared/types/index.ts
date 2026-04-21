@@ -93,3 +93,12 @@ export interface ResultPopupProps {
     result: SpinResult;
     onDismiss: () => void;
 }
+
+// ─── Component Props ──────────────────────────────────────────────────────────
+
+export interface ParticleConfig {
+    id: number;
+    src: string;
+    style: React.CSSProperties;
+    animationClass: string;
+}
