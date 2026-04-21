@@ -99,6 +99,9 @@ export interface ResultPopupProps {
 export interface ParticleConfig {
     id: number;
     src: string;
-    style: React.CSSProperties;
-    animationClass: string;
+    startX: number;
+    duration: number;
+    delay: number;
+    size: number;
+    driftX: number;
 }

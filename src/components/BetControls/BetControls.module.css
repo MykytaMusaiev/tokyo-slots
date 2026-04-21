@@ -1,0 +1,118 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.label {
+    font-family: "Bungee", sans-serif;
+    font-size: 14px;
+    color: #54c3ee;
+    letter-spacing: 0.11em;
+    -webkit-text-stroke: 1px #000000;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    user-select: none;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ─── Control buttons ─────────────────────────────────────────────────── */
+
+.controlButton {
+    width: 64px;
+    height: 64px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    /* box-shadow applied inline via Framer Motion */
+}
+
+.controlButton:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.controlSign {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2a1208;
+    line-height: 1;
+    user-select: none;
+    /* nudge up slightly to optically center within button face */
+    margin-top: -4px;
+}
+
+/* ─── Bet display ─────────────────────────────────────────────────────── */
+
+.display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    height: 64px;
+    min-width: 180px;
+    background: #5c4a44;
+    border: 2px solid #3a2820;
+    border-radius: 14px;
+    box-shadow: 0 5px 0 #2a1208;
+}
+
+.symbol {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f5e6c8;
+    font-family: "Press Start 2P", monospace;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    caret-color: #f5e6c8;
+}
+
+.input:read-only {
+    cursor: default;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .controlButton {
+        width: 52px;
+        height: 52px;
+    }
+
+    .display {
+        height: 52px;
+        min-width: 150px;
+        padding: 0 14px;
+    }
+
+    .input {
+        font-size: 13px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}

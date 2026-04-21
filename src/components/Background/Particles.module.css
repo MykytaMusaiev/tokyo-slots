@@ -23,6 +23,7 @@
 }
 
 /* Each particle falls from top, drifts sideways, fades */
+
 .particle {
     position: absolute;
     top: -80px;
