@@ -34,7 +34,8 @@
 
 @media (max-width: 768px) {
     .main {
-        gap: 16px;
         padding: 20px 20px 0;
+        margin: 40px 0px;
+        justify-content: space-between;
     }
 }

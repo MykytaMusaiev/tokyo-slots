@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { type ReelProps, ReelStatus, SymbolId } from '../../shared/types'
 import { SYMBOLS, SYMBOL_LIST } from '../../shared/constants/symbols'
 import { REEL_SPIN_LOOP_INTERVAL_MS } from '../../shared/constants/game'
 import styles from './Reel.module.css'
 
-const SYMBOL_HEIGHT = 110 // px — must match CSS .symbolImg height
+const SYMBOL_HEIGHT_FALLBACK = 110
 
 function getRandomSymbolId(): SymbolId {
   const total = SYMBOL_LIST.reduce((sum, s) => sum + s.weight, 0)
@@ -17,100 +17,100 @@ function getRandomSymbolId(): SymbolId {
   return SYMBOL_LIST[0].id
 }
 
-// Strip always holds [above, visible, below]
-interface Strip {
+interface ReelStrip {
   above: SymbolId
   visible: SymbolId
   below: SymbolId
+  translateY: number
 }
 
-function buildInitialStrip(symbolId: SymbolId): Strip {
+function buildIdleStrip(symbolId: SymbolId, h: number): ReelStrip {
   return {
     above: getRandomSymbolId(),
     visible: symbolId,
     below: getRandomSymbolId(),
+    translateY: -h,
   }
 }
 
 export function Reel({ symbolId, status }: ReelProps) {
-  const [strip, setStrip] = useState<Strip>(() => buildInitialStrip(symbolId))
-  const [translateY, setTranslateY] = useState(-SYMBOL_HEIGHT)
-  const [isBlurred, setIsBlurred] = useState(false)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const windowRef = useRef<HTMLDivElement>(null)
   const controls = useAnimation()
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // ── Spin loop ───────────────────────────────────────────────────────────────
-  useEffect(() => {
-    if (status === ReelStatus.Spinning) {
-      setIsBlurred(true)
+  const getSymbolHeight = (): number =>
+    windowRef.current?.offsetHeight ?? SYMBOL_HEIGHT_FALLBACK
 
-      intervalRef.current = setInterval(() => {
-        // Snap to top (show "above" symbol instantly)
-        setTranslateY(0)
+  const [strip, setStrip] = useState<ReelStrip>(() =>
+    buildIdleStrip(symbolId, SYMBOL_HEIGHT_FALLBACK)
+  )
 
-        // Shift strip down: new symbol enters from above
-        setStrip((prev) => ({
-          above: getRandomSymbolId(),
-          visible: prev.above,
-          below: prev.visible,
-        }))
+  // isBlurred is derived from status — no state needed
+  const isBlurred = status === ReelStatus.Spinning
 
-        // Animate strip down to show new visible symbol
-        requestAnimationFrame(() => {
-          setTranslateY(-SYMBOL_HEIGHT)
-        })
-      }, REEL_SPIN_LOOP_INTERVAL_MS)
-
-      return () => {
-        if (intervalRef.current) clearInterval(intervalRef.current)
-      }
-    }
-  }, [status])
-
-  // ── Stop on final symbol ────────────────────────────────────────────────────
-  useEffect(() => {
+  // ── Stopping / Idle: DOM position sync before paint ─────────────────────────
+  useLayoutEffect(() => {
     if (status === ReelStatus.Stopping) {
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
         intervalRef.current = null
       }
-
-      setIsBlurred(false)
-
-      // Set final symbol as visible
       setStrip({
         above: getRandomSymbolId(),
         visible: symbolId,
         below: getRandomSymbolId(),
-      })
-      setTranslateY(-SYMBOL_HEIGHT)
-
-      // Bounce animation on the symbol image
-      controls.start({
-        scale: [1, 1.12, 0.96, 1.04, 1],
-        transition: { duration: 0.45, ease: 'easeOut' },
+        translateY: -getSymbolHeight(),
       })
     }
-  }, [status, symbolId, controls])
 
-  // ── Sync symbol when idle (initial / reset) ─────────────────────────────────
-  useEffect(() => {
     if (status === ReelStatus.Idle || status === ReelStatus.Stopped) {
-      setStrip(buildInitialStrip(symbolId))
-      setTranslateY(-SYMBOL_HEIGHT)
-      setIsBlurred(false)
+      setStrip(buildIdleStrip(symbolId, getSymbolHeight()))
     }
-  }, [symbolId, status])
+  }, [status, symbolId])
 
-  const symbol = SYMBOLS[symbolId]
+  // ── Bounce animation on stop ─────────────────────────────────────────────────
+  useEffect(() => {
+    if (status !== ReelStatus.Stopping) return
+    controls.start({
+      scale: [1, 1.12, 0.96, 1.04, 1],
+      transition: { duration: 0.45, ease: 'easeOut' },
+    })
+  }, [status, controls])
+
+  // ── Spin loop ────────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (status !== ReelStatus.Spinning) return
+
+    intervalRef.current = setInterval(() => {
+      const h = getSymbolHeight()
+
+      // Snap strip to top (in setInterval callback — not synchronous in effect body)
+      setStrip((prev) => ({ ...prev, translateY: 0 }))
+
+      // Shift strip down one symbol
+      requestAnimationFrame(() => {
+        setStrip((prev) => ({
+          above: getRandomSymbolId(),
+          visible: prev.above,
+          below: prev.visible,
+          translateY: -h,
+        }))
+      })
+    }, REEL_SPIN_LOOP_INTERVAL_MS)
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [status])
+
+  const symbol = SYMBOLS[strip.visible]
 
   return (
-    <div className={styles.window}>
-      {/* Scrolling strip */}
+    <div className={styles.window} ref={windowRef}>
       <div
         className={styles.strip}
         style={{
-          transform: `translateY(${translateY}px)`,
+          transform: `translateY(${strip.translateY}px)`,
           transition:
             status === ReelStatus.Spinning
               ? `transform ${REEL_SPIN_LOOP_INTERVAL_MS - 10}ms linear`

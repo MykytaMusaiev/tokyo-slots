@@ -63,7 +63,7 @@
         max-height: 140px;
     }
 
-    .cloudsLayer {
-        bottom: 60px;
+    .cityLayer {
+        bottom: 10%;
     }
 }

@@ -20,7 +20,7 @@
 .reelsArea {
     position: absolute;
     z-index: 6;
-    top: 23%;
+    top: 13%;
     left: 9.5%;
     width: 77%;
     height: 56%;
@@ -73,5 +73,11 @@
     .leverHandle {
         width: 22px;
         height: 22px;
+    }
+
+    .reelsArea {
+        top: 23%;
+        gap: -10%;
+        align-items: center;
     }
 }

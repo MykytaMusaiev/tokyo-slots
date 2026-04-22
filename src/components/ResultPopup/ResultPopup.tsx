@@ -8,34 +8,11 @@ import winBoardImg from '../../shared/assets/images/win_board.svg'
 import loseBoardImg from '../../shared/assets/images/lose_board.svg'
 import betSymbolImg from '../../shared/assets/bet/bet_symbol.png'
 import styles from './ResultPopup.module.css'
+import { formatBalance } from '../../shared/utils/formatBalance'
+import { LOSE_ANIMATION, OVERLAY_COLORS, WIN_ANIMATION } from '../../shared/constants/resultOverlay'
 
-const OVERLAY_COLORS: Partial<Record<GameState, string>> = {
-  [GameState.Win]: 'rgba(165, 223, 247, 0.55)',
-  [GameState.Lose]: 'rgba(186, 86, 43, 0.55)',
-}
 
-const WIN_ANIMATION = {
-  initial: { scale: 0.5, opacity: 0 },
-  animate: { scale: 1, opacity: 1 },
-  exit: { scale: 0.8, opacity: 0 },
-  transition: { type: 'spring', stiffness: 300, damping: 18 },
-} as const
 
-const LOSE_ANIMATION = {
-  initial: { scale: 0.8, opacity: 0 },
-  animate: { scale: 1, opacity: 1 },
-  exit: { scale: 0.9, opacity: 0 },
-  transition: { type: 'tween', duration: 0.2, ease: 'easeOut' },
-} as const
-
-function formatAmount(value: number): { whole: string; cents: string } {
-  const fixed = Math.abs(value).toFixed(2)
-  const [wholePart, centsPart] = fixed.split('.')
-  const whole = Number(wholePart)
-    .toLocaleString('en-US', { useGrouping: true })
-    .replace(/,/g, ' ')
-  return { whole, cents: centsPart }
-}
 
 export function ResultPopup() {
   const gameState = useGameStore(selectGameState)
@@ -50,9 +27,8 @@ export function ResultPopup() {
   const overlayColor = OVERLAY_COLORS[gameState] ?? null
   const anim = isWin ? WIN_ANIMATION : LOSE_ANIMATION
 
-  // Win: show payout. Lose: show bet (amount deducted from balance)
   const displayAmount = isWin ? (lastResult?.payout ?? 0) : bet
-  const { whole, cents } = formatAmount(displayAmount)
+  const { whole, cents } = formatBalance(Math.abs(displayAmount))
 
   useEffect(() => {
     if (!isVisible) return
