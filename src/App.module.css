@@ -1,22 +1,40 @@
-.app-root {
+.appRoot {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
-    /* justify-content: center; */
+    flex-direction: column;
 }
 
-.slotMachineBlock {
+/* ─── Main content ────────────────────────────────────────────────────── */
+
+.main {
     position: relative;
+    z-index: 10;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    padding: 40px 20px;
+    justify-content: center;
+    gap: 7%;
+    padding: 40px 20px 0;
 }
 
+/* ─── Footer ──────────────────────────────────────────────────────────── */
+
+.footer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    /* no padding — BalanceDisplay SVG shape has its own visual space */
+}
+
+/* ─── Mobile ──────────────────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
-    .slotMachineBlock {
-        padding: 20px 20px;
+    .main {
+        gap: 16px;
+        padding: 20px 20px 0;
     }
 }

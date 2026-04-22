@@ -1,0 +1,99 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ─── Title ───────────────────────────────────────────────────────────── */
+
+.title {
+    font-family: "PoetsenOne", sans-serif;
+    font-size: 55px;
+    line-height: 71.9%;
+    color: #ffc434;
+    -webkit-text-stroke: 5px #341d1a;
+    paint-order: stroke fill;
+    text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.35);
+    user-select: none;
+}
+
+/* ─── Panel ───────────────────────────────────────────────────────────── */
+
+.panel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-image: url("../../shared/assets/images/footer.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* intrinsic ratio 411:123 */
+    width: 411px;
+    height: 123px;
+    justify-content: center;
+    /* push content down from narrow top edge */
+    padding-top: 28px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.symbol {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ─── Amount ──────────────────────────────────────────────────────────── */
+
+.amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+}
+
+.whole {
+    font-family: "Bungee", sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    -webkit-text-stroke: 3px #51521a33;
+    paint-order: stroke fill;
+    user-select: none;
+}
+
+.cents {
+    font-family: "Bungee", sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 3px rgba(81, 82, 26, 0.2);
+    paint-order: stroke fill;
+    user-select: none;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 38px;
+        -webkit-text-stroke: 4px #341d1a;
+    }
+
+    .whole,
+    .cents {
+        font-size: 22px;
+    }
+
+    .panel {
+        width: 300px;
+        height: 90px;
+        padding-top: 20px;
+        padding-bottom: 8px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}
