@@ -25,15 +25,6 @@ export function Background() {
           aria-hidden="true"
         />
       </div>
-
-      <div className={styles.cloudsLayer}>
-        <img
-          src="/src/shared/assets/images/clouds.svg"
-          alt=""
-          className={styles.clouds}
-          aria-hidden="true"
-        />
-      </div>
     </div>
   )
 }

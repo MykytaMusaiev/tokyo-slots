@@ -7,7 +7,7 @@
 
 .label {
     font-family: "Bungee", sans-serif;
-    font-size: 14px;
+    font-size: clamp(2.5rem, 4vw, 3rem);
     color: #54c3ee;
     letter-spacing: 0.11em;
     -webkit-text-stroke: 1px #000000;
@@ -115,7 +115,7 @@
     }
 
     .input {
-        font-size: 13px;
+        font-size: 23px;
     }
 
     .symbol {

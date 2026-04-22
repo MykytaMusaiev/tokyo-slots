@@ -10,6 +10,8 @@ const PRESS_TRANSITION = {
   damping: 20,
 } as const
 
+const IMG_TRANSITION = { duration: 0.1 } as const
+
 export function SpinButton() {
   const isSpinning = useGameStore(selectIsSpinning)
   const balance = useGameStore(selectBalance)
@@ -21,6 +23,7 @@ export function SpinButton() {
   return (
     <motion.button
       className={styles.button}
+      animate={{ y: isSpinning ? 8 : 0 }}
       whileTap={isDisabled ? {} : { y: 8 }}
       transition={PRESS_TRANSITION}
       onClick={isDisabled ? undefined : spin}
@@ -32,8 +35,8 @@ export function SpinButton() {
         src={spinNormalImg}
         alt=""
         className={styles.img}
-        whileTap={isDisabled ? {} : { opacity: 0 }}
-        transition={{ duration: 0.1 }}
+        animate={{ opacity: isSpinning ? 0 : 1 }}
+        transition={IMG_TRANSITION}
         aria-hidden
       />
 
@@ -42,9 +45,8 @@ export function SpinButton() {
         src={spinPressedImg}
         alt=""
         className={styles.img}
-        initial={{ opacity: 0 }}
-        whileTap={isDisabled ? {} : { opacity: 1 }}
-        transition={{ duration: 0.1 }}
+        animate={{ opacity: isSpinning ? 1 : 0 }}
+        transition={IMG_TRANSITION}
         aria-hidden
       />
     </motion.button>

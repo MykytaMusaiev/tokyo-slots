@@ -7,22 +7,21 @@ import { BetControls } from "./components/BetControls/BetControls"
 import { SpinButton } from "./components/SpinButton/SpinButton"
 import { BalanceDisplay } from "./components/BalanceDisplay/BalanceDisplay"
 import { ResultPopup } from "./components/ResultPopup/ResultPopup"
+import { CloudsOverlay } from "./components/CloudsOverlay/CloudsOverlay"
 
 function App() {
   useGameLogic()
-
   return (
     <div className={styles.appRoot}>
       <Background />
+      <CloudsOverlay />
       <ResultPopup />
-
       <main className={styles.main}>
         <TitlePlate />
         <SlotMachine />
         <BetControls />
         <SpinButton />
       </main>
-
       <footer className={styles.footer}>
         <BalanceDisplay />
       </footer>

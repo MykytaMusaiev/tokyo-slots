@@ -30,7 +30,6 @@ export const SPIN_MIN_DURATION_MS = 500;
 export const REEL_SPIN_LOOP_INTERVAL_MS = 80;
 
 // ─── Animations ───────────────────────────────────────────────────────────────
-
 export const BG_TRANSITION_DURATION_S = 0.4;
 export const POPUP_AUTO_DISMISS_MS = 1500;
 export const BALANCE_COUNT_DURATION_S = 1.5;

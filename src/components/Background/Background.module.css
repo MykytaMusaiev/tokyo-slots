@@ -43,21 +43,6 @@
     object-position: bottom;
 }
 
-/* Clouds */
-.cloudsLayer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.clouds {
-    width: 100%;
-    object-fit: cover;
-}
-
 @media (max-width: 768px) {
     .city {
         max-height: 140px;
