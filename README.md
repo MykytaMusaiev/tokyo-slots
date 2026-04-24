@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# 🎰 Tokyo Slots
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based slot machine game built with React + TypeScript + Framer Motion.
 
-Currently, two official plugins are available:
+![Tokyo Slots showcase](public/showcase.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + Vite
+- TypeScript (strict)
+- Zustand — state management
+- Framer Motion — animations
+- Howler.js — sound
+- CSS Modules
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Requirements:** Node.js 18+
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Clone project
+git clone https://github.com/MykytaMusaiev/tokyo-slots
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# From downloaded folder - install dependencies
+npm install
+
+# Start dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Type check
+npx tsc --noEmit
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Production build
+npm run build
+```
+
+---
+
+## Gameplay
+
+- Choose your bet with **+/−** controls or type directly
+- Spin via the **SPIN button** or pull the **lever**
+- Match 3 or 4 symbols to win — match four **7s** for the **Jackpot**
+- Balance is tracked across spins
+
+---
+
+## Project Structure
+
+```
+src/
+├── shared/
+│   ├── types/          # All TypeScript types and enums
+│   ├── constants/      # Game constants, sound keys
+│   ├── store/          # Zustand game store
+│   ├── hooks/          # useGameLogic, useSound, useAnimatedNumber
+│   ├── sounds/         # soundService (Howler)
+│   └── utils/          # formatBalance
+└── components/
+    ├── Background/     # Static background, particles
+    ├── CloudsOverlay/  # Fixed clouds layer (z-index above SpinButton)
+    ├── TitlePlate/     # Game title
+    ├── SlotMachine/    # Reels + lever
+    ├── BetControls/    # Bet input with +/− buttons
+    ├── SpinButton/     # Animated spin button
+    ├── BalanceDisplay/ # Animated balance counter
+    ├── ResultPopup/    # Win/Lose overlay with result
+    └── MuteButton/     # Global mute toggle
 ```
