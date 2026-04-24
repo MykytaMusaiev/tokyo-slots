@@ -8,12 +8,16 @@ import { SpinButton } from "./components/SpinButton/SpinButton"
 import { BalanceDisplay } from "./components/BalanceDisplay/BalanceDisplay"
 import { ResultPopup } from "./components/ResultPopup/ResultPopup"
 import { CloudsOverlay } from "./components/CloudsOverlay/CloudsOverlay"
+import { useSound } from "./shared/hooks/useSound"
+import { MuteButton } from "./components/MuteButton/MuteButton"
 
 function App() {
   useGameLogic()
+  useSound()
   return (
     <div className={styles.appRoot}>
       <Background />
+      <MuteButton />
       <CloudsOverlay />
       <ResultPopup />
       <main className={styles.main}>

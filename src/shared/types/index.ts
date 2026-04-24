@@ -42,6 +42,12 @@ export interface ReelState {
     status: ReelStatus;
 }
 
+export const SpinSource = {
+    Button: "button",
+    Lever: "lever",
+} as const;
+export type SpinSource = (typeof SpinSource)[keyof typeof SpinSource];
+
 // ─── Win Result ───────────────────────────────────────────────────────────────
 
 export const WinType = {
@@ -70,9 +76,10 @@ export interface GameStore {
     isMuted: boolean;
     isSpinning: boolean;
     lastResult: SpinResult | null;
+    spinSource: SpinSource | null;
 
     // Actions
-    spin: () => void;
+    spin: (source: SpinSource) => void;
     setBet: (value: number) => void;
     setMuted: (value: boolean) => void;
     resolveResult: (result: SpinResult) => void;

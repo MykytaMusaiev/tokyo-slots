@@ -6,6 +6,8 @@ import { BET_MIN, BET_MAX, BET_STEP } from '../../shared/constants/game'
 import betButtonImg from '../../shared/assets/bet/bet_control_button.png'
 import betSymbolImg from '../../shared/assets/bet/bet_symbol.png'
 import styles from './BetControls.module.css'
+import { soundService } from '../../shared/service/soundService'
+import { SOUND_KEY } from '../../shared/constants/sounds'
 
 const SHADOW_NORMAL = '0 5px 0 #2a1208'
 const SHADOW_NONE = '0 0px 0 #2a1208'
@@ -21,16 +23,11 @@ export function BetControls() {
 
   const [inputValue, setInputValue] = useState<string>(String(bet))
 
-  const handleDecrease = useCallback(() => {
-    const next = clampBet(bet - BET_STEP)
+  const handleChangeBet = useCallback((delta: number) => {
+    const next = clampBet(bet + delta)
     setBet(next)
     setInputValue(String(next))
-  }, [bet, setBet])
-
-  const handleIncrease = useCallback(() => {
-    const next = clampBet(bet + BET_STEP)
-    setBet(next)
-    setInputValue(String(next))
+    soundService.play(SOUND_KEY.CHANGE_BET)
   }, [bet, setBet])
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,14 +63,13 @@ export function BetControls() {
               : { y: 5, boxShadow: SHADOW_NONE }
           }
           transition={{ duration: 0.08 }}
-          onClick={handleDecrease}
+          onClick={() => handleChangeBet(-BET_STEP)}
           disabled={isSpinning || bet <= BET_MIN}
           aria-label="Decrease bet"
         >
           <span className={styles.controlSign}>−</span>
         </motion.button>
 
-        {/* Bet display */}
         <div className={styles.display}>
           <img src={betSymbolImg} alt="bet symbol" className={styles.symbol} />
           <input
@@ -99,7 +95,7 @@ export function BetControls() {
               : { y: 5, boxShadow: SHADOW_NONE }
           }
           transition={{ duration: 0.08 }}
-          onClick={handleIncrease}
+          onClick={() => handleChangeBet(BET_STEP)}
           disabled={isSpinning || bet >= BET_MAX}
           aria-label="Increase bet"
         >

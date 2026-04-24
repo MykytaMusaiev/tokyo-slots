@@ -2,6 +2,9 @@ import { motion, useAnimation } from 'framer-motion'
 import { useGameStore, selectIsSpinning, selectReels } from '../../shared/store/gameStore'
 import styles from './SlotMachine.module.css'
 import { Reel } from './Reel'
+import { soundService } from '../../shared/service/soundService'
+import { SOUND_KEY } from '../../shared/constants/sounds'
+import { SpinSource } from '../../shared/types'
 
 export function SlotMachine() {
   const reels = useGameStore(selectReels)
@@ -12,6 +15,8 @@ export function SlotMachine() {
   const handleLeverClick = async () => {
     if (isSpinning) return
 
+    soundService.play(SOUND_KEY.LEVER_DOWN)
+
     // 1. Різке опускання вниз (імітація натискання)
     await leverControls.start({
       scaleY: 0.4,
@@ -19,7 +24,7 @@ export function SlotMachine() {
       transition: { duration: 0.15, ease: 'circIn' },
     })
 
-    spin()
+    spin(SpinSource.Lever)
 
     // 2. Повернення з "відскоком" (Spring)
     await leverControls.start({

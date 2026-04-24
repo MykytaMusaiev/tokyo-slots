@@ -40,12 +40,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
     isMuted: false,
     isSpinning: false,
     lastResult: null,
+    spinSource: null,
 
     // ── Actions ──────────────────────────────────────────────────────────────────
 
-    spin: () => {
+    spin: (source: SpinSource) => {
         const { balance, bet, isSpinning } = get();
-
         if (isSpinning) return;
         if (balance < bet) return;
 
@@ -54,6 +54,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
             jackpot: state.jackpot + bet * JACKPOT_CONTRIBUTION_RATE,
             gameState: GameState.Spinning,
             isSpinning: true,
+            spinSource: source, // ← додати
             lastResult: null,
             reels: state.reels.map((reel) => ({
                 ...reel,
@@ -107,6 +108,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
                 ...reel,
                 status: ReelStatus.Stopped,
             })) as GameStore["reels"],
+            spinSource: null,
         }));
     },
 
@@ -119,7 +121,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
 }));
 
 // ─── Selectors ────────────────────────────────────────────────────────────────
-// Use these in components to avoid object destructuring re-renders.
 // TODO check and verify needing of each
 
 export const selectBalance = (s: GameStore) => s.balance;
@@ -131,3 +132,4 @@ export const selectIsMuted = (s: GameStore) => s.isMuted;
 export const selectIsSpinning = (s: GameStore) => s.isSpinning;
 export const selectLastResult = (s: GameStore) => s.lastResult;
 export const selectReelCount = (_s: GameStore) => REEL_COUNT;
+export const selectSpinSource = (s: GameStore) => s.spinSource;

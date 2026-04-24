@@ -8,7 +8,6 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    /* prevent tap highlight on mobile */
     -webkit-tap-highlight-color: transparent;
 }
 
