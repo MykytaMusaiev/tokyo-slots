@@ -4,7 +4,7 @@ import lemon from "../assets/slots/lemonslot.png";
 import crown from "../assets/slots/crownslot.png";
 import crystal from "../assets/slots/crystallslot.png";
 import coinSmile from "../assets/bg_icons/coin_smile.png";
-import coinArrows from "../bg_icons/coin_arrows.png";
+import coinArrows from "../assets/bg_icons/coin_arrows.png";
 
 export const PARTICLE_ICONS = [
     seven,
