@@ -16,7 +16,6 @@ import {
     BET_MAX,
     JACKPOT_INITIAL,
     JACKPOT_CONTRIBUTION_RATE,
-    REEL_COUNT,
 } from "../constants/game";
 
 // ─── Initial Reel State ───────────────────────────────────────────────────────
