@@ -2,6 +2,7 @@
 
 A browser-based slot machine game built with React + TypeScript + Framer Motion.
 
+![Tokyo Slots LIVE DEMO](https://tokyo-slots-alpha.vercel.app/)
 ![Tokyo Slots showcase](public/showcase.gif)
 
 ---
