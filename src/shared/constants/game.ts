@@ -17,6 +17,7 @@ export const JACKPOT_CONTRIBUTION_RATE = 0.01; // 1% of each bet → jackpot poo
 // ─── Reels ────────────────────────────────────────────────────────────────────
 
 export const REEL_COUNT = 4;
+export const SYMBOL_HEIGHT_FALLBACK = 110;
 
 // Delay (ms) before each reel stops, left → right
 export const REEL_STOP_DELAYS: [number, number, number, number] = [

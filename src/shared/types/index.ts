@@ -48,6 +48,13 @@ export const SpinSource = {
 } as const;
 export type SpinSource = (typeof SpinSource)[keyof typeof SpinSource];
 
+export interface ReelStrip {
+    above: SymbolId;
+    visible: SymbolId;
+    below: SymbolId;
+    translateY: number;
+}
+
 // ─── Win Result ───────────────────────────────────────────────────────────────
 
 export const WinType = {

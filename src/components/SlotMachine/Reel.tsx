@@ -1,37 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
-import { type ReelProps, ReelStatus, SymbolId } from '../../shared/types'
-import { SYMBOLS, SYMBOL_LIST } from '../../shared/constants/symbols'
-import { REEL_SPIN_LOOP_INTERVAL_MS } from '../../shared/constants/game'
+import { type ReelProps, ReelStatus, type ReelStrip } from '../../shared/types'
+import { SYMBOLS } from '../../shared/constants/symbols'
+import { REEL_SPIN_LOOP_INTERVAL_MS, SYMBOL_HEIGHT_FALLBACK } from '../../shared/constants/game'
 import styles from './Reel.module.css'
+import { buildIdleStrip } from '../../shared/utils/buildIdleStrip'
+import { getRandomSymbolId } from '../../shared/utils/getRandomSymbolId'
 
-const SYMBOL_HEIGHT_FALLBACK = 110
-
-function getRandomSymbolId(): SymbolId {
-  const total = SYMBOL_LIST.reduce((sum, s) => sum + s.weight, 0)
-  let rand = Math.random() * total
-  for (const s of SYMBOL_LIST) {
-    rand -= s.weight
-    if (rand <= 0) return s.id
-  }
-  return SYMBOL_LIST[0].id
-}
-
-interface ReelStrip {
-  above: SymbolId
-  visible: SymbolId
-  below: SymbolId
-  translateY: number
-}
-
-function buildIdleStrip(symbolId: SymbolId, h: number): ReelStrip {
-  return {
-    above: getRandomSymbolId(),
-    visible: symbolId,
-    below: getRandomSymbolId(),
-    translateY: -h,
-  }
-}
 
 export function Reel({ symbolId, status }: ReelProps) {
   const windowRef = useRef<HTMLDivElement>(null)
