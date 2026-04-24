@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {
     GameState,
     ReelStatus,
+    SpinSource,
     SymbolId,
     WinType,
     type GameStore,
@@ -131,5 +132,4 @@ export const selectJackpot = (s: GameStore) => s.jackpot;
 export const selectIsMuted = (s: GameStore) => s.isMuted;
 export const selectIsSpinning = (s: GameStore) => s.isSpinning;
 export const selectLastResult = (s: GameStore) => s.lastResult;
-export const selectReelCount = (_s: GameStore) => REEL_COUNT;
 export const selectSpinSource = (s: GameStore) => s.spinSource;
