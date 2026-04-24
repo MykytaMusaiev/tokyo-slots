@@ -1,9 +1,17 @@
+import seven from "../assets/slots/7slot.png";
+import cherry from "../assets/slots/cheryslot.png";
+import lemon from "../assets/slots/lemonslot.png";
+import crown from "../assets/slots/crownslot.png";
+import crystal from "../assets/slots/crystallslot.png";
+import coinSmile from "../assets/bg_icons/coin_smile.png";
+import coinArrows from "../bg_icons/coin_arrows.png";
+
 export const PARTICLE_ICONS = [
-    "/src/shared/assets/slots/7slot.png",
-    "/src/shared/assets/slots/cheryslot.png",
-    "/src/shared/assets/slots/lemonslot.png",
-    "/src/shared/assets/slots/crownslot.png",
-    "/src/shared/assets/slots/crystallslot.png",
-    "/src/shared/assets/bg_icons/coin_smile.png",
-    "/src/shared/assets/bg_icons/coin_arrows.png",
+    seven,
+    cherry,
+    lemon,
+    crown,
+    crystal,
+    coinSmile,
+    coinArrows,
 ] as const;
