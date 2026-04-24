@@ -1,15 +1,14 @@
 import styles from './CloudsOverlay.module.css'
+import cloudsImg from '../../shared/assets/images/clouds.svg'
+import cloudMobileImg from '../../shared/assets/images/cloud_mobile.svg'
 
 export function CloudsOverlay() {
   return (
     <picture className={styles.root}>
-      <source
-        srcSet="/src/shared/assets/images/cloud_mobile.svg"
-        media="(max-width: 768px)"
-      />
+      <source srcSet={cloudMobileImg} media="(max-width: 768px)" />
       <img
-        src="/src/shared/assets/images/clouds.svg"
-        alt=""
+        src={cloudsImg}
+        alt="Cloud_Bottom"
         className={styles.clouds}
         aria-hidden="true"
         loading="lazy"

@@ -5,6 +5,9 @@ import { Reel } from './Reel'
 import { soundService } from '../../shared/service/soundService'
 import { SOUND_KEY } from '../../shared/constants/sounds'
 import { SpinSource } from '../../shared/types'
+import slotBodyImg from '../../shared/assets/slot_machine/slot_body.png'
+import handleImg from '../../shared/assets/slot_machine/handle.png'
+import leverImg from '../../shared/assets/slot_machine/lever.png'
 
 export function SlotMachine() {
   const reels = useGameStore(selectReels)
@@ -53,12 +56,7 @@ export function SlotMachine() {
       </div>
 
       {/* Slot body overlay */}
-      <img
-        src="/src/shared/assets/slot_machine/slot_body.png"
-        alt="Slot machine"
-        className={styles.body}
-        draggable={false}
-      />
+      <img src={slotBodyImg} alt="Slot machine" className={styles.body} draggable={false} />
 
       {/* Lever */}
       <motion.div
@@ -69,18 +67,8 @@ export function SlotMachine() {
           cursor: isSpinning ? 'not-allowed' : 'pointer',
         }}
       >
-        <img
-          src="/src/shared/assets/slot_machine/handle.png"
-          alt=""
-          className={styles.leverHandle}
-          draggable={false}
-        />
-        <img
-          src="/src/shared/assets/slot_machine/lever.png"
-          alt=""
-          className={styles.leverBar}
-          draggable={false}
-        />
+        <img src={handleImg} alt="Handle" className={styles.leverHandle} draggable={false} />
+        <img src={leverImg} alt="Lever" className={styles.leverBar} draggable={false} />
       </motion.div>
     </div>
   )
