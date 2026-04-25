@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-
     z-index: 12;
 }
 
@@ -29,11 +28,9 @@
     background-image: url("../../shared/assets/images/footer.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    /* intrinsic ratio 411:123 */
     width: 411px;
     height: 123px;
     justify-content: center;
-    /* push content down from narrow top edge */
     padding-top: 28px;
     padding-bottom: 10px;
     box-sizing: border-box;
@@ -74,7 +71,7 @@
     user-select: none;
 }
 
-/* ─── Mobile ──────────────────────────────────────────────────────────── */
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
     .title {
@@ -97,5 +94,55 @@
     .symbol {
         width: 22px;
         height: 22px;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .title {
+        font-size: 40px;
+        -webkit-text-stroke: 4px #341d1a;
+    }
+
+    .panel {
+        width: 320px;
+        height: 96px;
+        padding-top: 22px;
+        padding-bottom: 8px;
+    }
+
+    .whole,
+    .cents {
+        font-size: 24px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-height: 600px) {
+    .title {
+        font-size: 30px;
+        -webkit-text-stroke: 3px #341d1a;
+    }
+
+    .panel {
+        width: 260px;
+        height: 78px;
+        padding-top: 18px;
+        padding-bottom: 6px;
+    }
+
+    .whole,
+    .cents {
+        font-size: 18px;
+    }
+
+    .symbol {
+        width: 18px;
+        height: 18px;
     }
 }

@@ -14,9 +14,7 @@
     user-select: none;
 }
 
-/* ── Reels area ──
-   Adjust top/left/width/height to align with transparent windows.
-   Current values are calibrated for slot_body.png at 500px width. */
+/* ── Reels area ── */
 .reelsArea {
     position: absolute;
     z-index: 6;
@@ -34,19 +32,18 @@
 .leverWrapper {
     position: absolute;
     z-index: 3;
-    right: -0.5%; /* Можливо, доведеться підправити залежно від slot_body */
-    top: 13%; /* Піднімаємо вище, щоб низ палиці збігався з синім кріпленням */
+    right: -0.5%;
+    top: 13%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Важливо: анімація має йти від основи (низу) палиці */
     transform-origin: bottom center;
     user-select: none;
 }
 
 .leverBar {
     width: 22px;
-    height: 70px; /* Трохи збільшимо висоту для кращого ефекту */
+    height: 70px;
     object-fit: contain;
     display: block;
 }
@@ -56,13 +53,14 @@
     height: 25px;
     object-fit: contain;
     display: block;
-    margin-bottom: -5px; /* Засуваємо трохи "за" палицю зверху, якщо треба */
+    margin-bottom: -5px;
 }
 
-/* ── Responsive ── */
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
     .root {
-        width: 340px;
+        width: 300px;
     }
 
     .leverBar {
@@ -79,5 +77,39 @@
         top: 22%;
         gap: -10%;
         align-items: center;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .root {
+        width: 320px;
+    }
+
+    .leverBar {
+        width: 18px;
+        height: 60px;
+    }
+
+    .leverHandle {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-height: 600px) {
+    .root {
+        width: 260px;
+    }
+
+    .leverBar {
+        width: 14px;
+        height: 50px;
+    }
+
+    .leverHandle {
+        width: 18px;
+        height: 18px;
     }
 }

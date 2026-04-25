@@ -1,5 +1,4 @@
 .button {
-    top: 5%;
     z-index: 2;
     position: relative;
     width: 251px;
@@ -23,11 +22,27 @@
     object-fit: contain;
 }
 
-/* ─── Mobile ──────────────────────────────────────────────────────────── */
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
     .button {
-        width: 180px;
-        height: 115px;
+        width: 150px;
+        height: 96px;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .button {
+        width: 200px;
+        height: 128px;
+    }
+}
+
+@media (max-height: 600px) {
+    .button {
+        width: 160px;
+        height: 102px;
     }
 }
