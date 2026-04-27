@@ -17,14 +17,29 @@
     align-items: center;
     justify-content: center;
     gap: clamp(6px, 2.5vh, 40px);
-    padding: clamp(8px, 2vh, 40px) 20px 0;
+    /* padding: clamp(8px, 2vh, 40px) 20px 0; */
+    margin-bottom: 15vh;
+}
+
+.spinButtonLayer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--clouds-h, 273px) * 0.57);
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.spinButtonLayer > * {
+    pointer-events: auto;
 }
 
 /* ─── Footer ──────────────────────────────────────────────────────────── */
 
 .footer {
     position: relative;
-    z-index: 11;
+    z-index: 12;
     display: flex;
     justify-content: center;
 }

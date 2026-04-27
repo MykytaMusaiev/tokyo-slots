@@ -30,19 +30,3 @@
         height: 96px;
     }
 }
-
-/* ─── Short screens (height) ─────────────────────────────────────────── */
-
-@media (max-height: 750px) {
-    .button {
-        width: 200px;
-        height: 128px;
-    }
-}
-
-@media (max-height: 600px) {
-    .button {
-        width: 160px;
-        height: 102px;
-    }
-}

@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react'
 import { Background } from "./components/Background"
 import { SlotMachine } from "./components/SlotMachine/SlotMachine"
 import { TitlePlate } from "./components/TitlePlate/TitlePlate"
@@ -14,18 +15,30 @@ import { MuteButton } from "./components/MuteButton/MuteButton"
 function App() {
   useGameLogic()
   useSound()
+
+  const [cloudsHeight, setCloudsHeight] = useState<number>(273)
+
+  const handleCloudsHeightChange = useCallback((height: number) => {
+    setCloudsHeight(height)
+  }, [])
+
   return (
-    <div className={styles.appRoot}>
+    <div
+      className={styles.appRoot}
+      style={{ '--clouds-h': `${cloudsHeight}px` } as React.CSSProperties}
+    >
       <Background />
       <MuteButton />
-      <CloudsOverlay />
       <ResultPopup />
       <main className={styles.main}>
         <TitlePlate />
         <SlotMachine />
         <BetControls />
-        <SpinButton />
       </main>
+      <div className={styles.spinButtonLayer}>
+        <SpinButton />
+      </div>
+      <CloudsOverlay onHeightChange={handleCloudsHeightChange} />
       <footer className={styles.footer}>
         <BalanceDisplay />
       </footer>
