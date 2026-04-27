@@ -29,6 +29,7 @@
     display: flex;
     justify-content: center;
     pointer-events: none;
+    /* width: 12%; */
 }
 
 .spinButtonLayer > * {
@@ -53,6 +54,9 @@
         justify-content: center;
         gap: clamp(4px, 1.5vh, 16px);
     }
+    /* .spinButtonLayer {
+        width: 100%;
+    } */
 }
 
 /* ─── Short screens (height) ─────────────────────────────────────────── */

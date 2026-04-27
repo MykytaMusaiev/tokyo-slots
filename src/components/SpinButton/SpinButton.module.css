@@ -1,8 +1,8 @@
 .button {
     z-index: 2;
     position: relative;
-    width: 251px;
-    height: 160px;
+    width: clamp(120px, 23vh, 251px);
+    height: clamp(77px, 14.7vh, 160px);
     background: transparent;
     border: none;
     padding: 0;
