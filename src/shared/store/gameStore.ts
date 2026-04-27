@@ -18,6 +18,7 @@ import {
     JACKPOT_INITIAL,
     JACKPOT_CONTRIBUTION_RATE,
 } from "../constants/game";
+import { clamp } from "../utils/clamp";
 
 // ─── Initial Reel State ───────────────────────────────────────────────────────
 
@@ -67,8 +68,7 @@ export const useGameStore = create<GameStore>()(
             },
 
             setBet: (value: number) => {
-                const clamped = Math.min(BET_MAX, Math.max(BET_MIN, value));
-                set({ bet: clamped });
+                set({ bet: clamp(value, BET_MIN, BET_MAX) });
             },
 
             setMuted: (value: boolean) => {
@@ -125,7 +125,7 @@ export const useGameStore = create<GameStore>()(
             },
         }),
         {
-            name: "tokyo-slots-storage", // унікальний ключ у localStorage
+            name: "tokyo-slots-storage",
             partialize: (state) => ({
                 balance: state.balance,
                 jackpot: state.jackpot,

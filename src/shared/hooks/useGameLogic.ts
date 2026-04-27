@@ -1,21 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useGameStore } from "../store/gameStore";
-import { selectIsSpinning, selectReels } from "../store/gameStore";
+import { selectIsSpinning } from "../store/gameStore";
 import { ReelStatus, SymbolId, WinType, type SpinResult } from "../types";
-import { SYMBOLS, SYMBOL_LIST, JACKPOT_SYMBOL_ID } from "../constants/symbols";
+import { SYMBOLS, JACKPOT_SYMBOL_ID } from "../constants/symbols";
 import { REEL_COUNT, REEL_STOP_DELAYS } from "../constants/game";
-
-// ─── Weighted random symbol pick ─────────────────────────────────────────────
-
-function pickWeightedSymbol(): SymbolId {
-    const total = SYMBOL_LIST.reduce((sum, s) => sum + s.weight, 0);
-    let rand = Math.random() * total;
-    for (const s of SYMBOL_LIST) {
-        rand -= s.weight;
-        if (rand <= 0) return s.id;
-    }
-    return SYMBOL_LIST[0].id;
-}
+import { getRandomSymbolId } from "../utils/getRandomSymbolId";
 
 // ─── Win condition check ──────────────────────────────────────────────────────
 
@@ -49,7 +38,7 @@ function checkWinCondition(
         };
     }
 
-    // Three-of-a-kind (any 3 adjacent or any 3 matching)
+    // Three-of-a-kind
     const counts = symbolIds.reduce<Partial<Record<SymbolId, number>>>(
         (acc, id) => {
             acc[id] = (acc[id] ?? 0) + 1;
@@ -74,33 +63,34 @@ function checkWinCondition(
 
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
-export function useGameLogic() {
+export function useGameLogic(): void {
     const isSpinning = useGameStore(selectIsSpinning);
-    const reels = useGameStore(selectReels);
     const setReelSymbol = useGameStore((s) => s.setReelSymbol);
     const setReelStatus = useGameStore((s) => s.setReelStatus);
     const resolveResult = useGameStore((s) => s.resolveResult);
     const bet = useGameStore((s) => s.bet);
 
-    // Store timeout IDs for cleanup
+    const betRef = useRef(bet);
+    useLayoutEffect(() => {
+        betRef.current = bet;
+    });
+
     const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
     useEffect(() => {
         if (!isSpinning) return;
 
-        // Clear any previous timeouts
         timeoutsRef.current.forEach(clearTimeout);
         timeoutsRef.current = [];
 
-        // Pre-generate final symbols for all 4 reels
+        const betAtSpinStart = betRef.current;
+
         const finalSymbols = Array.from({ length: REEL_COUNT }, () =>
-            pickWeightedSymbol(),
+            getRandomSymbolId(),
         ) as [SymbolId, SymbolId, SymbolId, SymbolId];
 
-        // Schedule each reel to stop at its designated delay
         finalSymbols.forEach((symbolId, index) => {
             const timeout = setTimeout(() => {
-                // Set final symbol first, then trigger stopping animation
                 setReelSymbol(index, symbolId);
                 setReelStatus(index, ReelStatus.Stopping);
 
@@ -110,7 +100,10 @@ export function useGameLogic() {
 
                     // When last reel stops — resolve the result
                     if (index === REEL_COUNT - 1) {
-                        const result = checkWinCondition(finalSymbols, bet);
+                        const result = checkWinCondition(
+                            finalSymbols,
+                            betAtSpinStart,
+                        );
                         resolveResult(result);
                     }
                 }, 500);
@@ -125,8 +118,5 @@ export function useGameLogic() {
             timeoutsRef.current.forEach(clearTimeout);
             timeoutsRef.current = [];
         };
-    }, [isSpinning, bet, setReelSymbol, setReelStatus, resolveResult]);
-
-    // Expose reels for consumers if needed
-    return { reels };
+    }, [isSpinning, setReelSymbol, setReelStatus, resolveResult]);
 }
