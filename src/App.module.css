@@ -28,13 +28,13 @@
     bottom: calc(var(--clouds-h, 273px) * 0.57);
     display: flex;
     justify-content: center;
-    pointer-events: none;
+    /* pointer-events: none; */
     /* width: 12%; */
 }
 
-.spinButtonLayer > * {
-    pointer-events: auto;
-}
+/* .spinButtonLayer > * { */
+/* pointer-events: auto; */
+/* } */
 
 /* ─── Footer ──────────────────────────────────────────────────────────── */
 
@@ -54,9 +54,9 @@
         justify-content: center;
         gap: clamp(4px, 1.5vh, 16px);
     }
-    /* .spinButtonLayer {
-        width: 100%;
-    } */
+    .spinButtonLayer {
+        z-index: 13;
+    }
 }
 
 /* ─── Short screens (height) ─────────────────────────────────────────── */

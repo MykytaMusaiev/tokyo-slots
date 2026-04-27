@@ -8,10 +8,11 @@
     justify-content: center;
     pointer-events: none;
     max-height: 35vh;
-    object-position: top;
 }
 
 .clouds {
     width: 100%;
     object-fit: cover;
+    object-position: top;
+    pointer-events: none;
 }
