@@ -4,8 +4,6 @@ import betSymbolImg from '../../shared/assets/bet/bet_symbol.png'
 import styles from './BalanceDisplay.module.css'
 import { formatBalance } from '../../shared/utils/formatBalance'
 
-
-
 export function BalanceDisplay() {
   const balance = useGameStore(selectBalance)
   const animated = useAnimatedNumber(balance)
@@ -15,7 +13,7 @@ export function BalanceDisplay() {
     <div className={styles.wrapper}>
       <span className={styles.title}>Balance</span>
       <div className={styles.panel}>
-        <img src={betSymbolImg} alt="" className={styles.symbol} aria-hidden />
+        <img src={betSymbolImg} alt="betIcon" className={styles.symbol} aria-hidden />
         <span className={styles.amount}>
           <span className={styles.whole}>{whole}</span>
           <span className={styles.cents}>.{cents}</span>

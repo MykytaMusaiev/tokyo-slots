@@ -29,15 +29,16 @@ export function SlotMachine() {
 
     spin(SpinSource.Lever)
 
-    // 2. Повернення з "відскоком" (Spring)
+
+    // 2. Return with bounce (Spring)
     await leverControls.start({
       scaleY: 1,
       y: 0,
       transition: {
         type: 'spring',
-        stiffness: 250, // Жорсткість пружини
-        damping: 12,    // Наскільки швидко згасають коливання
-        mass: 0.8       // "Вага" важеля
+        stiffness: 250, // Spring stiffness
+        damping: 12,    // How quickly oscillations decay
+        mass: 0.8       // Lever "weight"
       },
     })
   }

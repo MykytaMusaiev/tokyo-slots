@@ -18,12 +18,17 @@ const IMG_TRANSITION = { duration: 0.1 } as const
 export function SpinButton() {
   const isSpinning = useGameStore(selectIsSpinning)
   const balance = useGameStore(selectBalance)
-  const bet = useGameStore(selectBet)
-  const spin = useGameStore((s) => s.spin)
+  const currentBet = useGameStore(selectBet)
+  const handleSpin = useGameStore((s) => s.spin)
   const spinSource = useGameStore(selectSpinSource)
 
   const isPressedDown = isSpinning && spinSource === SpinSource.Button
-  const isDisabled = isSpinning || balance < bet
+  const isDisabled = isSpinning || balance < currentBet
+
+  const handleSpinClick = () => {
+    soundService.play(SOUND_KEY.SPIN_BUTTON)
+    handleSpin(SpinSource.Button)
+  }
 
   return (
     <motion.button
@@ -31,10 +36,7 @@ export function SpinButton() {
       animate={{ y: isPressedDown ? 8 : 0 }}
       whileTap={isDisabled ? {} : { y: 8 }}
       transition={PRESS_TRANSITION}
-      onClick={isDisabled ? undefined : () => {
-        soundService.play(SOUND_KEY.SPIN_BUTTON)
-        spin(SpinSource.Button)
-      }}
+      onClick={isDisabled ? undefined : handleSpinClick}
       disabled={isDisabled}
       aria-label="Spin"
     >
