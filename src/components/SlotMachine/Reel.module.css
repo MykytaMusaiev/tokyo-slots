@@ -1,0 +1,50 @@
+/* Visible window — clips the scrolling strip */
+.window {
+    width: 100%;
+    height: 110px; /* must match SYMBOL_HEIGHT in Reel.tsx */
+    overflow: hidden;
+    border-radius: 10px;
+    /* background: #ffffff; */
+    position: relative;
+}
+
+/* Strip holds 3 symbols stacked vertically */
+.strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    will-change: transform;
+}
+
+/* Each symbol slot = exact window height */
+.symbolSlot {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.symbolImg {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .window {
+        height: 80px;
+    }
+
+    .symbolSlot {
+        height: 80px;
+    }
+
+    .symbolImg {
+        width: 70px;
+        height: 70px;
+    }
+}

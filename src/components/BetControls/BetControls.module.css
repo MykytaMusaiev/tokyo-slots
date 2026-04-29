@@ -1,0 +1,181 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.label {
+    font-family: "Bungee", sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    color: #54c3ee;
+    letter-spacing: 0.11em;
+    -webkit-text-stroke: 1px #000000;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    user-select: none;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ─── Control buttons ─────────────────────────────────────────────────── */
+
+.controlButton {
+    width: 64px;
+    height: 64px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.controlButton:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.controlSign {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2a1208;
+    line-height: 1;
+    user-select: none;
+    margin-top: -4px;
+}
+
+/* ─── Bet display ─────────────────────────────────────────────────────── */
+
+.display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    height: 64px;
+    min-width: 180px;
+    background: #5c4a44;
+    border: 2px solid #3a2820;
+    border-radius: 14px;
+    box-shadow: 0 5px 0 #2a1208;
+}
+
+.symbol {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+
+    font-family: "Bungee", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.05em;
+    text-align: center;
+
+    color: #ffffff;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    caret-color: #ffffff;
+}
+
+.input:read-only {
+    cursor: default;
+}
+
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .controlButton {
+        width: 52px;
+        height: 52px;
+    }
+
+    .display {
+        height: 52px;
+        min-width: 150px;
+        padding: 0 14px;
+    }
+
+    .input {
+        font-size: 23px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .label {
+        font-size: clamp(1.8rem, 3vw, 2.2rem);
+    }
+
+    .controlButton {
+        width: 52px;
+        height: 52px;
+    }
+
+    .display {
+        height: 52px;
+        min-width: 160px;
+        padding: 0 16px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+
+    .input {
+        font-size: 18px;
+    }
+}
+
+@media (max-height: 600px) {
+    .label {
+        font-size: 1.5rem;
+    }
+
+    .wrapper {
+        gap: 4px;
+    }
+
+    .controlButton {
+        width: 44px;
+        height: 44px;
+    }
+
+    .display {
+        height: 44px;
+        min-width: 140px;
+        padding: 0 12px;
+    }
+
+    .symbol {
+        width: 18px;
+        height: 18px;
+    }
+
+    .input {
+        font-size: 16px;
+    }
+}

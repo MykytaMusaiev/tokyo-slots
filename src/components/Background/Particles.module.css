@@ -1,0 +1,54 @@
+.root {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.desktopOnly {
+    display: contents;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktopOnly {
+        display: none;
+    }
+
+    .mobileOnly {
+        display: contents;
+    }
+}
+
+/* Each particle falls from top, drifts sideways, fades */
+
+.particle {
+    position: absolute;
+    top: -80px;
+    object-fit: contain;
+    will-change: transform;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(110vh) translateX(var(--drift-x)) rotate(360deg);
+        opacity: 0;
+    }
+}

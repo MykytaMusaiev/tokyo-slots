@@ -1,0 +1,115 @@
+.root {
+    position: relative;
+    width: 400px;
+}
+
+/* ── Slot body image ── */
+.body {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Reels area ── */
+.reelsArea {
+    position: absolute;
+    z-index: 6;
+    top: 22%;
+    left: 9.5%;
+    width: 77%;
+    height: 56%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: -10%;
+    align-items: center;
+}
+
+/* ── Lever ── */
+.leverWrapper {
+    position: absolute;
+    z-index: 3;
+    right: -0.5%;
+    top: 13%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+    user-select: none;
+}
+
+.leverBar {
+    width: 22px;
+    height: 70px;
+    object-fit: contain;
+    display: block;
+}
+
+.leverHandle {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: -5px;
+}
+
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .root {
+        width: 300px;
+    }
+
+    .leverBar {
+        width: 16px;
+        height: 64px;
+    }
+
+    .leverHandle {
+        width: 22px;
+        height: 22px;
+    }
+
+    .reelsArea {
+        top: 22%;
+        gap: -10%;
+        align-items: center;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .root {
+        width: 320px;
+    }
+
+    .leverBar {
+        width: 18px;
+        height: 60px;
+    }
+
+    .leverHandle {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-height: 600px) {
+    .root {
+        width: 260px;
+    }
+
+    .leverBar {
+        width: 14px;
+        height: 50px;
+    }
+
+    .leverHandle {
+        width: 18px;
+        height: 18px;
+    }
+}

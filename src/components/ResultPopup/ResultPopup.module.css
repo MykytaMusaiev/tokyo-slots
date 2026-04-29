@@ -1,0 +1,111 @@
+/* ─── Root ────────────────────────────────────────────────────────────── */
+
+.root {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* ─── Color overlay ───────────────────────────────────────────────────── */
+
+.colorOverlay {
+    position: absolute;
+    inset: 0;
+}
+
+/* ─── Sunburst ────────────────────────────────────────────────────────── */
+
+.sunburst {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: repeating-conic-gradient(
+        rgba(255, 255, 255, 0.18) 0deg,
+        rgba(255, 255, 255, 0.18) 10deg,
+        transparent 10deg,
+        transparent 20deg
+    );
+    transform-origin: center center;
+}
+
+/* ─── Popup — board + amount as a stack ──────────────────────────────── */
+
+.popup {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── Board SVG ───────────────────────────────────────────────────────── */
+
+.board {
+    width: 625px;
+    height: auto;
+    display: block;
+}
+
+/* ─── Amount — absolute, centered over board ──────────────────────────── */
+
+.amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.symbol {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ─── Payout text ─────────────────────────────────────────────────────── */
+
+.payoutWin,
+.payoutLose {
+    display: flex;
+    align-items: baseline;
+    font-family: "Bungee", sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+.payoutWin {
+    color: #1b0d38;
+}
+
+.payoutLose {
+    color: #ff4444;
+}
+
+.sign {
+    margin-right: 2px;
+}
+
+.cents {
+    opacity: 0.4;
+    font-size: 25px;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .board {
+        width: 85vw;
+    }
+}

@@ -1,0 +1,148 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 12;
+}
+
+/* ─── Title ───────────────────────────────────────────────────────────── */
+
+.title {
+    font-family: "PoetsenOne", sans-serif;
+    font-size: 55px;
+    line-height: 71.9%;
+    color: #ffc434;
+    -webkit-text-stroke: 5px #341d1a;
+    paint-order: stroke fill;
+    text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.35);
+    user-select: none;
+}
+
+/* ─── Panel ───────────────────────────────────────────────────────────── */
+
+.panel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-image: url("../../shared/assets/images/footer.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 411px;
+    height: 123px;
+    justify-content: center;
+    padding-top: 28px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.symbol {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ─── Amount ──────────────────────────────────────────────────────────── */
+
+.amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+}
+
+.whole {
+    font-family: "Bungee", sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    -webkit-text-stroke: 3px #51521a33;
+    paint-order: stroke fill;
+    user-select: none;
+}
+
+.cents {
+    font-family: "Bungee", sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 3px rgba(81, 82, 26, 0.2);
+    paint-order: stroke fill;
+    user-select: none;
+}
+
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 38px;
+        -webkit-text-stroke: 4px #341d1a;
+    }
+
+    .whole,
+    .cents {
+        font-size: 22px;
+    }
+
+    .panel {
+        width: 300px;
+        height: 90px;
+        padding-top: 20px;
+        padding-bottom: 8px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .title {
+        font-size: 40px;
+        -webkit-text-stroke: 4px #341d1a;
+    }
+
+    .panel {
+        width: 320px;
+        height: 96px;
+        padding-top: 22px;
+        padding-bottom: 8px;
+    }
+
+    .whole,
+    .cents {
+        font-size: 24px;
+    }
+
+    .symbol {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-height: 600px) {
+    .title {
+        font-size: 30px;
+        -webkit-text-stroke: 3px #341d1a;
+    }
+
+    .panel {
+        width: 260px;
+        height: 78px;
+        padding-top: 18px;
+        padding-bottom: 6px;
+    }
+
+    .whole,
+    .cents {
+        font-size: 18px;
+    }
+
+    .symbol {
+        width: 18px;
+        height: 18px;
+    }
+}

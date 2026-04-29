@@ -1,0 +1,54 @@
+.root {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bgColor {
+    position: absolute;
+    inset: 0;
+    background-color: #daf3a6;
+}
+
+.headerStrip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.headerImg {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.cityLayer {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.city {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+@media (max-width: 768px) {
+    .city {
+        max-height: 140px;
+    }
+
+    .cityLayer {
+        bottom: 10%;
+    }
+}

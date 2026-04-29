@@ -1,0 +1,35 @@
+.root {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.image {
+    width: 320px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* ─── Mobile (width) ──────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .image {
+        width: 220px;
+    }
+}
+
+/* ─── Short screens (height) ─────────────────────────────────────────── */
+
+@media (max-height: 750px) {
+    .image {
+        width: 240px;
+    }
+}
+
+@media (max-height: 600px) {
+    .image {
+        width: 180px;
+    }
+}
