@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useGameStore } from '../../shared/store/gameStore'
 import { selectBet, selectIsSpinning } from '../../shared/store/gameStore'
@@ -23,30 +23,30 @@ export function BetControls() {
 
   const [inputValue, setInputValue] = useState<string>(String(bet))
 
-  const handleChangeBet = useCallback((delta: number) => {
+  const handleChangeBet = (delta: number) => {
     const next = clampBet(bet + delta)
     setBet(next)
     setInputValue(String(next))
     soundService.play(SOUND_KEY.CHANGE_BET)
-  }, [bet, setBet])
+  }
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/[^0-9]/g, '')
     setInputValue(raw)
-  }, [])
+  }
 
-  const handleInputBlur = useCallback(() => {
+  const handleInputBlur = () => {
     const parsed = parseInt(inputValue, 10)
     const clamped = isNaN(parsed) ? BET_MIN : clampBet(parsed)
     setBet(clamped)
     setInputValue(String(clamped))
-  }, [inputValue, setBet])
+  }
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.currentTarget.blur()
     }
-  }, [])
+  }
 
   return (
     <div className={styles.wrapper}>
